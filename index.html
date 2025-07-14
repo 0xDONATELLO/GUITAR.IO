@@ -27,6 +27,13 @@
 </head>
 
 <body>
+
+    <div id = 'container'>
+    <button id="start_btn" class="start">Ready!</button>
+    <canvas id="myCanvas"></canvas>
+
+</div>
+
     <div class="at-wrap loading">
         <div class="at-overlay">
             <div class="at-overlay-content">
@@ -345,6 +352,15 @@
     let audiopermission = null;
     let pause = false;
 
+    const startBtn = document.getElementById('start_btn');
+startBtn.addEventListener('click',function() {
+    PP.audioCtx.resume().then(() => {
+         console.log('Playback resumed successfully');
+        audiopermission = true;
+        startBtn.style.display="none"
+    })
+});
+
     function loop () {
 
 
@@ -378,7 +394,9 @@
             //        v.drawTextwBackground(bin.posX * v.canv.width, flippedY, PP.midiToNoteName(midi), (bin.midi%12) ); //bin.midi isn't rounded
             //})
 
+
         if (winnerMidis && winnerMidis.length > 0) {
+
             const notesWithOctaves = winnerMidis.map(midiToNoteWithOctave);
             //console.log("Detected notes:", notesWithOctaves.join(", "));
 
